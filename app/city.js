@@ -7,8 +7,8 @@ class City {
     this.divinity_ = new Divinity(divinityName);
     this.corn_ = 1000;
     this.gold_ = 1000;
-    this.sciencelevel_ = 1;
-    this.scienceinvest_ = 0;
+    this.scienceLevel_ = 1;
+    this.scienceInvest_ = 0;
     this.army_ = [];
     this.soulForTheArmy(300);
     this.init();
@@ -33,7 +33,7 @@ class City {
   }
 
   getScience() {
-    return this.sciencelevel_;
+    return this.scienceLevel_;
   }
 
   getShit(s) {
@@ -50,18 +50,18 @@ class City {
 
   showShit() {
     console.log(
-        `${this.name_}: C ${this.corn_}, G ${this.gold_}, S ${
-            this.sciencelevel_
-            } `
+      `${this.name_}: C ${this.corn_}, G ${this.gold_}, S ${
+        this.scienceLevel_
+      } `
     );
   }
 
   scienceInvest(gold) {
-    this.scienceinvest_ += gold;
+    this.scienceInvest_ += gold;
     this.gold_ -= gold;
-    if (this.scienceinvest_ >= this.sciencelevel_ + 1 ** 2 * 1000) {
-      this.scienceinvest_ -= this.sciencelevel_ + 1 ** 2 * 1000;
-      this.sciencelevel_ += 1;
+    if (this.scienceInvest_ >= this.scienceLevel_ + 1 ** 2 * 1000) {
+      this.scienceInvest_ -= this.scienceLevel_ + 1 ** 2 * 1000;
+      this.scienceLevel_ += 1;
     }
   }
 
@@ -75,12 +75,15 @@ class City {
     }
   }
 
-  armyStatus() {
+  buryTheDead() {
+    this.army_ = this.army_.filter(s => s.isAlive_);
+  }
 
-    const old = (this.army_.filter(s => s.age > 55)).length;
-    const injured = this.army_.filter(s => s.ishurt).length;
-    const well = this.army_.filter(s => !s.ishurt).length;
-    console.log(`Vieux : ${old}  Estropiés : ${injured}  Potables : ${well}`);
+  armyStatus() {
+    const mort = this.army_.filter(s => !s.isAlive_).length;
+    const injured = this.army_.filter(s => s.isHurt_).length;
+    const well = this.army_.filter(s => !s.isHurt_ && s.isAlive_).length;
+    console.log(`Morts : ${mort}  Estropiés : ${injured}  Potables : ${well}`);
   }
 }
 

@@ -1,8 +1,12 @@
 class Soldier {
   constructor() {
     this.age_ = Math.floor(Math.random() * (25 - 16) + 16); // Soldat engagé entre 16 et 25 ans
-    this.ishurt_ = false; // Si le soldat est blessé
-    this.isalive_ = true; // Bool pour savoir si le soldat est en vie (sert pour le tri)
+    this.isHurt_ = false; // Si le soldat est blessé
+    this.isAlive_ = true; // Bool pour savoir si le soldat est en vie (sert pour le tri)
+    setTimeout(
+      () => (this.isAlive_ = false),
+      1000 * (Math.random() * (70 - 55) + 55)
+    );
   }
 
   getAge() {
@@ -10,24 +14,36 @@ class Soldier {
   }
 
   getHurt() {
-    return this.ishurt_;
+    return this.isHurt_;
   }
 
   getAlive() {
-    return this.isalive_;
+    return this.isAlive_;
   }
 
   setHurt(hurt) {
-    this.ishurt_ = hurt;
+    this.isHurt_ = hurt;
   }
 
   setAlive(alive) {
-    this.isalive_ = alive;
+    this.isAlive_ = alive;
   }
 
-  // passTheYear(){
-  //
-  // }
+  attackVictory(){
+    (Math.random() < 0.4) ? this.isAlive_=false : this.isHurt_=true;
+  }
+
+  defenseDefeat(){
+    (Math.random() < 0.4) ? this.isHurt_=true : false;
+  }
+
+  attackDefeat(){
+    (Math.random() < 0.6) ? this.isAlive_=false : this.isHurt_=true;
+  }
+
+  defenseVictory(){
+    (Math.random() < 0.25)? this.isHurt_=true : false;
+  }
 }
 
 module.exports = {Soldier};
