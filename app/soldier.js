@@ -7,3 +7,5 @@ class Soldier {
 }
 
 module.exports = {Soldier};
+
+"coucou moi c'est Elsa"
