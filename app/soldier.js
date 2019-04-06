@@ -28,22 +28,6 @@ class Soldier {
   setAlive(alive) {
     this.isAlive_ = alive;
   }
-
-  attackVictory(){
-    (Math.random() < 0.4) ? this.isAlive_=false : this.isHurt_=true;
-  }
-
-  defenseDefeat(){
-    (Math.random() < 0.4) ? this.isHurt_=true : false;
-  }
-
-  attackDefeat(){
-    (Math.random() < 0.6) ? this.isAlive_=false : this.isHurt_=true;
-  }
-
-  defenseVictory(){
-    (Math.random() < 0.25)? this.isHurt_=true : false;
-  }
 }
 
 module.exports = {Soldier};
