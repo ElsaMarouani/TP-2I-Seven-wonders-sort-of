@@ -50,9 +50,9 @@ class City {
 
   showShit() {
     console.log(
-      `${this.name_}: C ${this.corn_}, G ${this.gold_}, S ${
-        this.sciencelevel_
-      } `
+        `${this.name_}: C ${this.corn_}, G ${this.gold_}, S ${
+            this.sciencelevel_
+            } `
     );
   }
 
@@ -66,8 +66,8 @@ class City {
   }
 
   soulForTheArmy(gold) {
-    let i;
-    const nbr = gold % 100;
+    let i = 0;
+    const nbr = gold / 100;
     const soldat = new Soldier();
     this.gold -= 100 * nbr;
     for (i = 0; i < nbr; i++) {
@@ -76,20 +76,10 @@ class City {
   }
 
   armyStatus() {
-    let injured = 0;
-    let old = 0;
-    let well = 0;
-    this.army_.forEach();
-    {
-      if (this.age_ > 55) {
-        old += 1;
-      } else if (this.hurt_ == true) {
-        injured += 1;
-      } else {
-        well += 1;
-      }
-    }
 
+    const old = (this.army_.filter(s => s.age > 55)).length;
+    const injured = this.army_.filter(s => s.ishurt).length;
+    const well = this.army_.filter(s => !s.ishurt).length;
     console.log(`Vieux : ${old}  Estropiés : ${injured}  Potables : ${well}`);
   }
 }
