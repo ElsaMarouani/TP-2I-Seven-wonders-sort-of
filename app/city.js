@@ -60,7 +60,6 @@ class City {
     );
   }
 
-
   addWonder() {
     this.listWonders_.push(new Wonder());
     // Console.log(this.name_, "begin", this.listWonders_[this.listWonders_.length-1].name_);
@@ -68,10 +67,10 @@ class City {
 
   deleteWonder() {
     console.log(
-        this.listWonders_[this.listWonders_.length - 1].name_,
-        'of',
-        this.name_,
-        'is destroyed !'
+      this.listWonders_[this.listWonders_.length - 1].name_,
+      'of',
+      this.name_,
+      'is destroyed !'
     );
     this.listWonders_.pop();
   }
