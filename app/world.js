@@ -73,13 +73,13 @@ class World {
   }
 
   sortCityList() {
-    this.listCities_ = R.sortBy(
+    /*this.listCities_ = R.sortBy(
       R.pipe(
         R.prop('listWonders_'),
         R.length
       ),
       this.listCities_
-    );
+    );*/
   }
 
   destroyAllWondersInConstruction(){
@@ -209,9 +209,9 @@ class World {
           'C:' + this.goodFormatText(this.listCities_[city].corn_, 11);
         this.listPlayersInformationToPrint_[whereToPrint + 3] =
           'A:' +
-          this.goodFormatText(this.listCities_[city].army_.length, 4) +
+          this.goodFormatText(this.listCities_[city].army_.length, 6) +
           ' S:' +
-          this.goodFormatText(this.listCities_[city].scienceLevel_, 4);
+          this.goodFormatText(this.listCities_[city].scienceLevel_, 2);
         whereToPrint += 4 * this.listCities_[city].wondersAchieved_;
       }
     }
@@ -235,7 +235,7 @@ class World {
     // On veut rajouter le bon nombre d'espace aux variables lors de l'affichage pour ne pas décaler les bords
     if (typeof wordToPrint === 'number') {
       // Si c'est un nombre
-      wordToPrint = String(wordToPrint); // On le change en string pour le traitement
+      wordToPrint = String(Math.floor(wordToPrint)); // On le change en string pour le traitement
     }
 
     if (typeof wordToPrint === 'string') {
@@ -338,6 +338,9 @@ class World {
   }
 
   showWorld() {
+    for(var cityS = 0; cityS < this.listCities_.length; cityS++){
+      this.listCities_[cityS].limitTheRessources();
+    }
     this.uniqueWonder();
     this.printWonders();
     this.printPlayersInformation();

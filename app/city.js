@@ -13,11 +13,11 @@ class City {
     this.scienceLevel_ = 1;
     this.scienceInvest_ = 0;
     this.army_ = [];
-    this.soulForTheArmy(300);
     this.init();
   }
 
   init() {
+    this.soulForTheArmy(300);
     this.addWonder();
     this.divinity_.init();
     this.divinity_.worldEvents.on('favor', shit => this.getShit(shit));
@@ -49,8 +49,30 @@ class City {
   gettingEverything() {
     this.divinity_.offeringCorn(this.corn_);
     this.divinity_.offeringGold(this.gold_);
-    this.army_ += 50;
     this.scienceLevel_ += 1;
+  }
+
+  limitTheRessources(){
+    this.corn_ = Math.floor(this.corn_);
+    this.gold = Math.floor(this.gold_);
+    if(this.corn_ > 999999999){
+      this.corn = 999999999;
+    }
+    if(this.gold > 999999999){
+      this.gold = 999999999;
+    }
+    if(this.army_.length > 999999){
+      console.log("army too big: ", this.army_.length);
+    }
+    if(this.scienceLevel_ > 99){
+      this.scienceLevel_ = 99;
+    }
+    if(this.listWonders_.length > 7){
+      console.log("Too much wonder on the same city: ", this.listWonders_.length);
+    }
+    if(this.scienceInvest_ > 999999999){
+      this.scienceInvest_ = 999999999;
+    }
   }
 
   annihilation(s){
@@ -109,7 +131,13 @@ class City {
   }
 
   buryTheDead() {
-    this.army_ = this.army_.filter(s => s.isAlive_);
+    var mort = 0;
+    for(var soldier = 0; soldier < this.army_.length; soldier++) {
+      if (!this.army_[soldier].isAlive_) {
+        mort += 1;
+      }
+    }
+    //this.army_ = this.army_.filter(s => s.isAlive_);
   }
 
   armyStatus() {
