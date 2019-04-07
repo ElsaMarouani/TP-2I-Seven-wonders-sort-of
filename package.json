@@ -22,5 +22,7 @@
     "ramda": "^0.26.1",
     "sinon": "^7.2.7",
     "xo": "^0.24.0"
-  }
+  },
+  "repository": "https://github.com/ElsaMarouani/TP-2I-Seven-wonders-sort-of.git",
+  "author": "Alkabann <aymeric.laugel@laposte.net>"
 }

@@ -30,7 +30,23 @@ class Soldier {
   }
 
   attackVictory(){
-    Math.random() < 0.6 ? s => s.setAlive(false) : s => s.setHurt(true)
+    const s=Math.random();
+    (s< 0.4) ? this.isAlive_=false : this.isHurt_=true;
+  }
+
+  attackDefeat(){
+    const s=Math.random();
+    (s< 0.6) ? this.isAlive_=false : this.isHurt_=true;
+  }
+
+  defenseVictory(){
+    const s=Math.random();
+    (s< 0.25) ? this.isHurt_=true : this.setHurt=false
+  }
+
+  defenseDefeat(){
+    const s=Math.random();
+    (s< 0.4) ? this.isHurt_=true : this.setHurt=false
   }
 
 }

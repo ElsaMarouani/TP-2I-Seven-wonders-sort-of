@@ -11,17 +11,17 @@ class War {
     const result = attackpower - defensepower;
     if (result < 0) {
       attackantsoldiers.forEach(
-
+          s=>s.attackDefeat()
       );
       defensesoldiers.forEach(
-        Math.random() < 0.25 ? s => s.setHurt(true) : s => s.setHurt(false)
+          s=>s.defenseVictory()
       );
     } else if (result > 0) {
       attackantsoldiers.forEach(
-        Math.random() < 0.4 ? s => s.setAlive(false) : s => s.setHurt(true)
+        s=>s.attackVictory()
       );
       defensesoldiers.forEach(
-        Math.random() < 0.4 ? s => s.setHurt(true) : s => s.setHurt(false)
+        s=>s.defenseDefeat()
       );
     } else {
       attackantsoldiers.forEach(s => s.setAlive(false));

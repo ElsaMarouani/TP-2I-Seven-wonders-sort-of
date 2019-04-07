@@ -5,6 +5,7 @@ class Divinity {
     this.name_ = name || 'UNKDIVINITY';
     this.corn_ = 0;
     this.gold_ = 0;
+    this.army_=[];
     this.worldEvents_ = new EventEmitter();
     this.timeFactor_ = timeFactor || 1000;
   }
@@ -24,7 +25,9 @@ class Divinity {
       }
 
       if (Math.random() > 0.99 ) {
-        this.worldEvents.emit('retribution', Math.floor(10000 * Math.random()));
+        this.worldEvents.emit('retribution',{
+          army_: this.army_
+        });
       }
     }, this.timeFactor);
   }

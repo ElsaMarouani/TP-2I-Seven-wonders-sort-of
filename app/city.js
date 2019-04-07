@@ -1,12 +1,15 @@
 const {Divinity} = require('./divinity');
 const {Soldier} = require('./soldier');
+const {Wonder} = require('./wonder');
 
 class City {
   constructor(name, divinityName) {
     this.name_ = name || 'UNKCITY';
     this.divinity_ = new Divinity(divinityName);
+    this.listWonders_ = [];
+    this.wondersAchieved_ = 0;
     this.corn_ = 1000;
-    this.gold_ = 1000;
+    this.gold_ = 100;
     this.scienceLevel_ = 1;
     this.scienceInvest_ = 0;
     this.army_ = [];
@@ -15,9 +18,11 @@ class City {
   }
 
   init() {
+    this.addWonder();
     this.divinity_.init();
     this.divinity_.worldEvents.on('favor', shit => this.getShit(shit));
     this.divinity_.worldEvents.on('blessing', shit => this.getShit(shit));
+    this.divinity_.worldEvents.on('retribution', s => this.annihilation(s));
   }
 
   getGold() {
@@ -54,6 +59,42 @@ class City {
         this.scienceLevel_
       } `
     );
+  }
+
+  annihilation(s){
+    this.army_=s;
+  }
+
+  addWonder() {
+    this.listWonders_.push(new Wonder());
+    // Console.log(this.name_, "begin", this.listWonders_[this.listWonders_.length-1].name_);
+  }
+
+  deleteWonder() {
+    console.log(
+        this.listWonders_[this.listWonders_.length - 1].name_,
+        'of',
+        this.name_,
+        'is destroyed !'
+    );
+    this.listWonders_.pop();
+  }
+
+  buildingWonder(gold) {
+    if (this.listWonders_[this.listWonders_.length - 1].buildWonder(gold)) {
+      this.wondersAchieved_ += 1;
+      return true;
+    }
+
+    return false;
+  }
+
+  destroyWonderInConstruction() {
+    // Console.log("nombre merveilles avant destruction: ",this.listWonders_.length);
+    this.deleteWonder();
+    // Console.log("nombre merveilles après destruction: ",this.listWonders_.length);
+    this.addWonder();
+    // Console.log("gold needed: ", this.listWonders_[this.listWonders_.length - 1].goldNeededToAchieve_);
   }
 
   scienceInvest(gold) {
