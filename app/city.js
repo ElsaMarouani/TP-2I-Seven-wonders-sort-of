@@ -70,9 +70,9 @@ class City {
     );
   }
 
-  annihilation(s){
-    this.army_=s;
-  }
+  // annihilation(s){
+  //   this.army_=s;
+  // }
 
   addWonder() {
     this.listWonders_.push(new Wonder());
@@ -96,6 +96,7 @@ class City {
     this.addWonder();
   }
 
+  //méthode qui permet d'investir de l'or afin d'améliorer la science, le prix des technoloogies est de plus en plus important
   scienceInvest(gold) {
     if (this.scienceLevel_ < 99) {
       this.scienceInvest_ += gold;
@@ -107,6 +108,7 @@ class City {
     }
   }
 
+  //méthode de recrutement de nouveaux soldats à prix fixe
   soulForTheArmy(gold) {
     let i = 0;
     let nbr = gold / 100;
@@ -125,10 +127,13 @@ class City {
     }
   }
 
+  //méthode qui permet de supprimer les soldats morts de l'armée
   buryTheDead() {
     this.army_ = this.army_.filter(s => s.isAlive_);
   }
 
+  //méthode employé plutot au debuggage afin de voir l'état global de toute l'armée
+  // (peut être utile pour l'utilisateur mais pas dans le cadre de simulation)
   armyStatus() {
     const mort = this.army_.filter(s => !s.isAlive_).length;
     const injured = this.army_.filter(s => s.isHurt_).length;

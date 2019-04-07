@@ -1,11 +1,11 @@
 const {City} = require('./city');
 
 class Trade{
-    trade(ressource) {
+    trade(city,ressource) {
         return new Promise(resolve => {
             setTimeout(() => {
-                const rand=Math.random()*(1.4 - 1) + 1;
-                ressource=ressource*rand;
+                const coef=(Math.random()*(1.4 - 1) + 1)*(0.1*city.getScience());
+                ressource=ressource*coef;
                 resolve(ressource);
             }, 2000);
         });
@@ -14,7 +14,7 @@ class Trade{
     async asyncCallGold(city, gold) {
         city.setGold(-gold);
         // console.log('la caravane part...');
-        var result = await this.trade(gold);
+        var result = await this.trade(city,gold);
         city.setGold(result);
         // console.log('la caravane est arrivée!!!');
     }
@@ -22,7 +22,7 @@ class Trade{
     async asyncCallCorn(city, corn) {
         city.setGold(-corn);
         // console.log('la caravane part...');
-        var result = await this.trade(corn);
+        var result = await this.trade(city,corn);
         city.setCorn(result);
         // console.log('la caravane est arrivée!!!');
     }

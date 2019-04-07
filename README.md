@@ -10,4 +10,5 @@ Classe qui contient les différentes informations de la cité tel que son or, so
 Classe qui définit la divinité de la ville et qui a été peu modifiée 
 
 ## __soldier__
-Classe contenant les informations d'un soldat 
+Classe contenant les informations d'un soldat principalement son état de santé ainsi que sa date de mort (et les méthodes associées)
+
