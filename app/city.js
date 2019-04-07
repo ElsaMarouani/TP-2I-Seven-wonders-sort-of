@@ -55,27 +55,45 @@ class City {
     this.divinity_.offeringGold(this.gold_);
   }
 
-  limitTheRessources(){
+
+  limitTheRessources() {
     this.corn_ = Math.floor(this.corn_);
     this.gold = Math.floor(this.gold_);
-    if(this.corn_ > 999999999){
+    if (this.corn_ > 999999999) {
       this.corn_ = 999999999;
     }
-    if(this.gold > 999999999){
+    if (this.gold > 999999999) {
       this.gold_ = 999999999;
     }
-    if(this.army_.length > 999999){
+    if (this.army_.length > 999999) {
       console.log("army too big: ", this.army_.length);
     }
-    if(this.scienceLevel_ > 99){
+    if (this.scienceLevel_ > 99) {
       this.scienceLevel_ = 99;
     }
-    if(this.listWonders_.length > 7){
+    if (this.listWonders_.length > 7) {
       console.log("Too much wonder on the same city: ", this.listWonders_.length);
     }
-    if(this.scienceInvest_ > 999999999){
+    if (this.scienceInvest_ > 999999999) {
       this.scienceInvest_ = 999999999;
     }
+  }
+
+  setGold(gold){
+      this.gold_+=Math.floor(gold);
+  }
+
+  setCorn(corn){
+      this.corn_+=Math.floor(corn);
+  }
+
+
+  showShit() {
+    console.log(
+      `${this.name_}: C ${this.corn_}, G ${this.gold_}, S ${
+        this.scienceLevel_
+      } `
+    );
   }
 
   annihilation(s){
@@ -120,7 +138,6 @@ class City {
   }
 
   soulForTheArmy(gold) {
-    console.log("on donne ", gold, " à l'armée");
     let i = 0;
     let nbr = gold / 100;
     if (this.army_.length + nbr < 9999) {

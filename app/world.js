@@ -341,8 +341,6 @@ class World {
     for (let cityW = 0; cityW < this.listCities_.length; cityW++){
       this.listCities_[cityW].buryTheDead();
       this.listCities_[cityW].gettingBlessed();
-      console.log(this.listCities_[cityW].gold_);
-      console.log(this.listCities_[cityW].gold_ * this.rand(0.2,0.4));
       this.listCities_[cityW].soulForTheArmy(this.listCities_[cityW].gold_ * this.rand(0.2,0.5));  //investit de20 à 50% de son or dans l'armée
       this.listCities_[cityW].scienceInvest(this.listCities_[cityW].gold_ * this.rand(0.1,0.3));    //investit de 10 à 30% de son or dans la recherche
     }
