@@ -16,6 +16,10 @@ class City {
     this.init();
   }
 
+  randC(min, max){
+    return Math.random() * (max - min) + min;
+  }
+
   init() {
     this.soulForTheArmy(300);
     this.addWonder();
@@ -46,20 +50,19 @@ class City {
     this.gold_ += Math.floor(s.gold);
   }
 
-  gettingEverything() {
-    this.divinity_.offeringCorn(this.corn_);
+  gettingBlessed() {
+    this.divinity_.offeringCorn(this.corn_ * 0.1);
     this.divinity_.offeringGold(this.gold_);
-    this.scienceLevel_ += 1;
   }
 
   limitTheRessources(){
     this.corn_ = Math.floor(this.corn_);
     this.gold = Math.floor(this.gold_);
     if(this.corn_ > 999999999){
-      this.corn = 999999999;
+      this.corn_ = 999999999;
     }
     if(this.gold > 999999999){
-      this.gold = 999999999;
+      this.gold_ = 999999999;
     }
     if(this.army_.length > 999999){
       console.log("army too big: ", this.army_.length);
@@ -87,7 +90,9 @@ class City {
     this.listWonders_.pop();
   }
 
-  buildingWonder(gold) {
+  buildingWonder() {
+    var gold = this.gold_ * this.randC(0,1)
+    this.gold_ -= gold;
     if (this.listWonders_[this.listWonders_.length - 1].buildWonder(gold)) {
       this.wondersAchieved_ += 1;
       return true;
@@ -101,6 +106,8 @@ class City {
     this.addWonder();
   }
 
+
+
   scienceInvest(gold) {
     if (this.scienceLevel_ < 99) {
       this.scienceInvest_ += gold;
@@ -113,6 +120,7 @@ class City {
   }
 
   soulForTheArmy(gold) {
+    console.log("on donne ", gold, " à l'armée");
     let i = 0;
     let nbr = gold / 100;
     if (this.army_.length + nbr < 9999) {
@@ -126,6 +134,7 @@ class City {
       for (i = 0; i < nbr; i++) {
         const soldat = new Soldier();
         this.army_.push(soldat);
+
       }
     }
   }
@@ -137,7 +146,7 @@ class City {
         mort += 1;
       }
     }
-    //this.army_ = this.army_.filter(s => s.isAlive_);
+    this.army_ = this.army_.filter(s => s.isAlive_);
   }
 
   armyStatus() {
