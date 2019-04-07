@@ -337,6 +337,10 @@ class World {
 
   }
 
+  Victory(){
+    
+  }
+
   showWorld() {
     this.uniqueWonder();
     this.printWonders();
