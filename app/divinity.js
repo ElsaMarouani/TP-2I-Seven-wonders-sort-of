@@ -16,14 +16,14 @@ class Divinity {
         gold: this.gold * 0.1
       });
 
-      if (Math.random() > 0.95) {
+      if (Math.random() > 0.95 && Math.random() < 0.99) {
         this.worldEvents.emit('blessing', {
           corn: 100 * this.corn,
           gold: 100 * this.gold
         });
       }
 
-      if (Math.random() > 0.99) {
+      if (Math.random() > 0.99 ) {
         this.worldEvents.emit('retribution', Math.floor(10000 * Math.random()));
       }
     }, this.timeFactor);

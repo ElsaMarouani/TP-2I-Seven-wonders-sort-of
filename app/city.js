@@ -57,21 +57,31 @@ class City {
   }
 
   scienceInvest(gold) {
-    this.scienceInvest_ += gold;
-    this.gold_ -= gold;
-    if (this.scienceInvest_ >= this.scienceLevel_ + 1 ** 2 * 1000) {
-      this.scienceInvest_ -= this.scienceLevel_ + 1 ** 2 * 1000;
-      this.scienceLevel_ += 1;
+    if (this.scienceLevel_ < 99) {
+      this.scienceInvest_ += gold;
+      this.gold_ -= gold;
+      if (this.scienceInvest_ >= this.scienceLevel_ + 1 ** 2 * 1000) {
+        this.scienceInvest_ -= this.scienceLevel_ + 1 ** 2 * 1000;
+        this.scienceLevel_ += 1;
+      }
     }
   }
 
   soulForTheArmy(gold) {
     let i = 0;
-    const nbr = gold / 100;
-    const soldat = new Soldier();
-    this.gold -= 100 * nbr;
-    for (i = 0; i < nbr; i++) {
-      this.army_.push(soldat);
+    let nbr = gold / 100;
+    if (this.army_.length + nbr < 9999) {
+      this.gold -= 100 * nbr;
+      for (i = 0; i < nbr; i++) {
+        const soldat = new Soldier();
+        this.army_.push(soldat);
+      }
+    } else {
+      nbr = 9999 - this.army_.length;
+      for (i = 0; i < nbr; i++) {
+        const soldat = new Soldier();
+        this.army_.push(soldat);
+      }
     }
   }
 

@@ -5,7 +5,7 @@ class Soldier {
     this.isAlive_ = true; // Bool pour savoir si le soldat est en vie (sert pour le tri)
     setTimeout(
       () => (this.isAlive_ = false),
-      1000 * (Math.random() * (70 - 55) + 55)
+      1000 * ((Math.random() * (70 - 55) + 55)-this.age_)
     );
   }
 
@@ -28,6 +28,11 @@ class Soldier {
   setAlive(alive) {
     this.isAlive_ = alive;
   }
+
+  attackVictory(){
+    Math.random() < 0.6 ? s => s.setAlive(false) : s => s.setHurt(true)
+  }
+
 }
 
 module.exports = {Soldier};
