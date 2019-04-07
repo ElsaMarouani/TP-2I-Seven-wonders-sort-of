@@ -1,3 +1,4 @@
+const {City} = require('./app/city');
 const {War} = require('./app/war');
 const {World} = require('./app/world');
 const {Trade} = require('./app/trade');
@@ -11,41 +12,18 @@ world.addCity('Ephesus', 'Artemis');
 world.addCity('Rhodes', 'Hélios');
 world.addCity('Alexandria', 'Osiris');
 const guerre = new War();
+//setInterval(()=> world.listCities_[0].armyStatus(),2000);
+
+guerre.battle(world.listCities_[0].getArmy(), world.listCities_[1].getArmy(), world.listCities_[0].getScience(), world.listCities_[1].getScience());
+
+setInterval(() => world.showWorld(), 4000);
+
 
 //declare une fonction asychrone de type Trade
-const mainGold = async (city,gold) => {
+const main = async (city1,gold1) => {
 const t = new Trade();
-await t.asyncCallGold(city,gold);
-}
-
-const mainCorn = async (city,corn) => {
-    const t = new Trade();
-    await t.asyncCallCorn(city,corn);
+await t.asyncCall(city1,gold1);
 }
 
 //l'appel de la fonction asynchrone
-setInterval(()=>mainGold(world.listCities_[0],world.listCities_[0].getGold()),4000);
-setInterval(()=>mainCorn(world.listCities_[0],world.listCities_[0].getCorn()),4000);
-
-// world.listCities_[0].soulForTheArmy(50000);
-//
-// guerre.battle(
-//   world.listCities_[0].getArmy(),
-//   world.listCities_[0].getArmy(),
-//   world.listCities_[0].getScience(),
-//   world.listCities_[0].getScience()
-// );
-// world.listCities_[0].armyStatus();
-//
-// setInterval(() => world.buildingWonders(2000), 4000);
-// setInterval(() => world.citiesGettingEverything(), 4000);
-// setInterval(() => world.showWorld(), 4000);
-// world.buildingWonders(5000);
-// world.showWorld();
-
-// world.listCities_[0].soulForTheArmy(4000);
-// setInterval(()=> world.listCities_[0].armyStatus(),2000);
-//setInterval(() => world.listCities_[0].buryTheDead(),10000);
-// setInterval(() => world.listCities_[0].scienceInvest(world.listCities_[0].getGold() * 0.1), 1000);
-//setInterval(() => world.listCities_[0].showShit(), 1000);
-//setInterval(() => world.listCities_[0].getShit(world.listCities_[0]),1000);
+setInterval(()=>main(world.listCities_[0],world.listCities_[0].getGold()),4000);
