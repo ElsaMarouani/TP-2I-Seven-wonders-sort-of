@@ -12,3 +12,14 @@ Classe qui définit la divinité de la ville et qui a été peu modifiée
 ## __soldier__
 Classe contenant les informations d'un soldat principalement son état de santé ainsi que sa date de mort (et les méthodes associées)
 
+## __war__
+Classe fonctionnelle ne contenant que la méthode battle
+
+## __trade__
+Classe fonctionnelle asynchrone qui définit un envoi de caravane commerciale
+
+## __world__
+
+## __wonder__
+
+## __soldier__

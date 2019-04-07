@@ -34,17 +34,15 @@ class World {
     this.printText('contact: aymeric.laugel@laposte.net');
   }
 
-  citiesGettingEverything(){
-    for (let city = 0; city < this.listCities_.length; city++){
-      this.listCities_[city].gettingEverything();
-    }
+  rand(min, max){
+    return Math.random() * (max - min) + min;
   }
 
   addCity(name, divinityName) {
     this.listCities_.push(new City(name, divinityName));
   }
 
-  buildingWonders(gold) {
+  buildingWonders() {
       for (let city = 0; city < this.listCities_.length; city++) {
         let allWondersAreBuild = 0;
         for (let wonder = 0; wonder < this.listWondersAchieved_.length; wonder++) {
@@ -54,7 +52,7 @@ class World {
           }
         }
         if (allWondersAreBuild < 7) {
-          if (this.listCities_[city].buildingWonder(gold)) {
+          if (this.listCities_[city].buildingWonder()) {
             // Si buildingWonder return true, on a bien construit une merveille
             this.printText(this.listCities_[city].name_ + ' achieved ' + this.listCities_[city].listWonders_[this.listCities_[city].listWonders_.length - 1].name_);
             this.listWondersAchieved_[this.listCities_[city].listWonders_[this.listCities_[city].listWonders_.length - 1].wonderChosen_] = 1;
@@ -73,13 +71,13 @@ class World {
   }
 
   sortCityList() {
-    this.listCities_ = R.sortBy(
+    /*this.listCities_ = R.sortBy(
       R.pipe(
         R.prop('listWonders_'),
         R.length
       ),
       this.listCities_
-    );
+    );*/
   }
 
   destroyAllWondersInConstruction(){
@@ -90,10 +88,11 @@ class World {
     }
   }
 
-  destroyAWonderFinished(city){
-    for (let wonderD = 0; wonderD < city.listWonders_.length; wonderD++){
-      if(city.listWonders_[wonderD].isFinished_ === 1){
-        city.listWonders_.splice(wonderD, 1);
+
+  furyOfTheGods(city){
+    for (let wonderD = 0; wonderD < city.listWonders_.length; wonderD++){   //pour toutes les merveilles de cette ville
+      if(city.listWonders_[wonderD].isFinished_ === 1){   //si la merveille est finie
+        city.listWonders_.splice(wonderD, 1);   //supprimer la merveille
       }
     }
   }
@@ -193,9 +192,9 @@ class World {
     for (let i = 0; i < 28; i++) {
       this.listPlayersInformationToPrint_[i] = this.goodFormatText('', 13);
     }
-
     let whereToPrint = 0;
     for (let city = 0; city < this.listCities_.length; city++) {
+      this.listCities_[city].limitTheRessources();
       // Pour chaque ville
       if (this.listCities_[city].wondersAchieved_ > 0) {
         // Si la ville a au moins une merveille de construite
@@ -209,9 +208,9 @@ class World {
           'C:' + this.goodFormatText(this.listCities_[city].corn_, 11);
         this.listPlayersInformationToPrint_[whereToPrint + 3] =
           'A:' +
-          this.goodFormatText(this.listCities_[city].army_.length, 4) +
+          this.goodFormatText(this.listCities_[city].army_.length, 6) +
           ' S:' +
-          this.goodFormatText(this.listCities_[city].scienceLevel_, 4);
+          this.goodFormatText(this.listCities_[city].scienceLevel_, 2);
         whereToPrint += 4 * this.listCities_[city].wondersAchieved_;
       }
     }
@@ -235,7 +234,7 @@ class World {
     // On veut rajouter le bon nombre d'espace aux variables lors de l'affichage pour ne pas décaler les bords
     if (typeof wordToPrint === 'number') {
       // Si c'est un nombre
-      wordToPrint = String(wordToPrint); // On le change en string pour le traitement
+      wordToPrint = String(Math.floor(wordToPrint)); // On le change en string pour le traitement
     }
 
     if (typeof wordToPrint === 'string') {
@@ -318,7 +317,7 @@ class World {
     console.log('|                     _/              Alexandria   \\__         ____/      \\____                    ___/                                       |                          ', this.listPlayersInformationToPrint_[14], '   ', this.listWondersToPrint_[14], '|');
     console.log('|\\                   |                  -----         \\______/                 \\_____             /                                           |                          ', this.listPlayersInformationToPrint_[15], '   ', this.listWondersToPrint_[15], '|');
     console.log('| \\_                 |                 | A B |                                       \\            |                                           |                                                        |');
-    console.log('|   |              __/                 | D C |                     Gizeh             |            /                                           |                          ', this.listPlayersInformationToPrint_[16], '   ', this.listWondersToPrint_[16], '|');
+    console.log('|   |              __/                 | D C |                      Giza             |            /                                           |                          ', this.listPlayersInformationToPrint_[16], '   ', this.listWondersToPrint_[16], '|');
     console.log('|   \\__        __/                      -----                      -----              \\___       |                                            |                          ', this.listPlayersInformationToPrint_[17], '   ', this.listWondersToPrint_[17], '|');
     console.log('|      \\______/                                                   | A B |                 \\_____/                                             |                          ', this.listPlayersInformationToPrint_[18], '   ', this.listWondersToPrint_[18], '|');
     console.log('|                                                                 | D C |                                                                     |                          ', this.listPlayersInformationToPrint_[19], '   ', this.listWondersToPrint_[19], '|');
@@ -338,6 +337,14 @@ class World {
   }
 
   showWorld() {
+      this.buildingWonders(4000)   //investit de 30 à 70% de son or dans sa merveille
+    for (let cityW = 0; cityW < this.listCities_.length; cityW++){
+      this.listCities_[cityW].buryTheDead();
+      this.listCities_[cityW].gettingBlessed();
+      this.listCities_[cityW].soulForTheArmy(this.listCities_[cityW].gold_ * this.rand(0.2,0.5));  //investit de20 à 50% de son or dans l'armée
+      this.listCities_[cityW].scienceInvest(this.listCities_[cityW].gold_ * this.rand(0.1,0.3));    //investit de 10 à 30% de son or dans la recherche
+    }
+
     this.uniqueWonder();
     this.printWonders();
     this.printPlayersInformation();
