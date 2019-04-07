@@ -1,11 +1,11 @@
 /*
 P: La Pyramide de Khéops garde les ressources
-J: Les Jardins suspendus de Babylone alimentent les troupes
-Z: La Statue de Zeus plus de chance d'avoir un super
+G: Les Jardins suspendus de Babylone alimentent les troupes
+S: La Statue de Zeus plus de chance d'avoir un super
 M: Le Mausolée d'Halicarnasse  ramène les morts
 T: Le Temple d'Artémis rallonge durée vie soldats
 C: Le Colosse de Rhodes meilleur en défense
-A: Le Phare d'Alexandrie pour le commerce
+L: Le Phare d'Alexandrie pour le commerce
 */
 
 class Wonder {
@@ -38,19 +38,19 @@ class Wonder {
   chooseWonder() {
     this.wonderChosen_ = this.getRandomInt(7);
     if (this.wonderChosen_ === 0) {
-      this.name_ = 'The Great Pyramid';
+      this.name_ = 'the Great Pyramid';
     } else if (this.wonderChosen_ === 1) {
-      this.name_ = 'The Hanging Gardens';
+      this.name_ = 'the Hanging Gardens';
     } else if (this.wonderChosen_ === 2) {
-      this.name_ = 'The Statue of Zeus';
+      this.name_ = 'the Statue of Zeus';
     } else if (this.wonderChosen_ === 3) {
-      this.name_ = 'The Temple of Artemis';
+      this.name_ = 'the Temple of Artemis';
     } else if (this.wonderChosen_ === 4) {
-      this.name_ = 'The Mausoleum of Halicarnassus';
+      this.name_ = 'The Mausoleum';
     } else if (this.wonderChosen_ === 5) {
-      this.name_ = 'The Colossus of Rhodes';
+      this.name_ = 'the Colossus';
     } else {
-      this.name_ = 'The Lighthouse of Alexandria';
+      this.name_ = 'the Lighthouse';
     }
 
     this.drawWonder();
