@@ -22,7 +22,7 @@ class City {
     this.divinity_.init();
     this.divinity_.worldEvents.on('favor', shit => this.getShit(shit));
     this.divinity_.worldEvents.on('blessing', shit => this.getShit(shit));
-    this.divinity_.worldEvents.on('retribution', s => this.annihilation(s));
+    //this.divinity_.worldEvents.on('retribution', s => this.annihilation(s));
   }
 
   getGold() {
@@ -46,40 +46,22 @@ class City {
     this.gold_ += Math.floor(s.gold);
   }
 
-  giveShit() {
+  gettingEverything() {
     this.divinity_.offeringCorn(this.corn_);
     this.divinity_.offeringGold(this.gold_);
-    // This.corn_ = 0;
-    // this.gold_ = 0;
+    this.army_ += 50;
+    this.scienceLevel_ += 1;
   }
 
-  showShit() {
-    console.log(
-      `${this.name_}: C ${this.corn_}, G ${this.gold_}, S ${
-        this.scienceLevel_
-      } `
-    );
-  }
-
-<<<<<<< HEAD
   annihilation(s){
     this.army_=s;
   }
 
-=======
->>>>>>> cfaacc5001d44471a86e98494dded2f71c96341b
   addWonder() {
     this.listWonders_.push(new Wonder());
-    // Console.log(this.name_, "begin", this.listWonders_[this.listWonders_.length-1].name_);
   }
 
   deleteWonder() {
-    console.log(
-      this.listWonders_[this.listWonders_.length - 1].name_,
-      'of',
-      this.name_,
-      'is destroyed !'
-    );
     this.listWonders_.pop();
   }
 
@@ -93,11 +75,8 @@ class City {
   }
 
   destroyWonderInConstruction() {
-    // Console.log("nombre merveilles avant destruction: ",this.listWonders_.length);
     this.deleteWonder();
-    // Console.log("nombre merveilles après destruction: ",this.listWonders_.length);
     this.addWonder();
-    // Console.log("gold needed: ", this.listWonders_[this.listWonders_.length - 1].goldNeededToAchieve_);
   }
 
   scienceInvest(gold) {

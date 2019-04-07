@@ -34,8 +34,13 @@ class World {
     this.printText('contact: aymeric.laugel@laposte.net');
   }
 
+  citiesGettingEverything(){
+    for (let city = 0; city < this.listCities_.length; city++){
+      this.listCities_[city].gettingEverything();
+    }
+  }
+
   addCity(name, divinityName) {
-    // Console.log('new city created');
     this.listCities_.push(new City(name, divinityName));
   }
 
@@ -44,40 +49,15 @@ class World {
         let allWondersAreBuild = 0;
         for (let wonder = 0; wonder < this.listWondersAchieved_.length; wonder++) {
           // On va compter les 1 dans le tableau de listWondersAchieved_ pour voir si toutes les wonders ne sont pas déjà toutes finies
-          //console.log(this.listWondersAchieved_[wonder]);
           if (this.listWondersAchieved_[wonder] === 1) {
             allWondersAreBuild += 1;
           }
         }
-        console.log(allWondersAreBuild, "are already build.");
         if (allWondersAreBuild < 7) {
           if (this.listCities_[city].buildingWonder(gold)) {
             // Si buildingWonder return true, on a bien construit une merveille
-            this.printText(
-                this.listCities_[city].name_ +
-                ' achieved ' +
-                this.listCities_[city].listWonders_[
-                this.listCities_[city].listWonders_.length - 1
-                    ].name_
-            );
-            console.log(
-                this.listCities_[city].name_,
-                'achieved',
-                this.listCities_[city].listWonders_[
-                this.listCities_[city].listWonders_.length - 1
-                    ].name_
-            );
-            this.listWondersAchieved_[
-                this.listCities_[city].listWonders_[
-                this.listCities_[city].listWonders_.length - 1
-                    ].wonderChosen_
-                ] = 1;
-            console.log(
-                this.listCities_[city].listWonders_[
-                this.listCities_[city].listWonders_.length - 1
-                    ].name_,
-                'is add to the list of finished wonders.'
-            );
+            this.printText(this.listCities_[city].name_ + ' achieved ' + this.listCities_[city].listWonders_[this.listCities_[city].listWonders_.length - 1].name_);
+            this.listWondersAchieved_[this.listCities_[city].listWonders_[this.listCities_[city].listWonders_.length - 1].wonderChosen_] = 1;
             this.chooseConstructionsToDestroy(this.listCities_[city]); // Il faut donc détruire toutes les autres merveilles du même type encore en construction
             this.listCities_[city].addWonder(); // Puis ajouter une nouvelle merveille à construire à la ville
             this.uniqueWonder(); // Puis vérfier qu'on ne commene pas une merveille déjà fini
@@ -103,7 +83,6 @@ class World {
   }
 
   destroyAllWondersInConstruction(){
-    console.log("destruction de toutes les merveilles en cours de construction.")
     for (let city = 0; city < this.listCities_.length; city++){
       if(this.listCities_[city].listWonders_[this.listCities_[city].listWonders_.length -1].isFinished_){
         this.listCities_[city].deleteWonder();
@@ -114,7 +93,6 @@ class World {
   destroyAWonderFinished(city){
     for (let wonderD = 0; wonderD < city.listWonders_.length; wonderD++){
       if(city.listWonders_[wonderD].isFinished_ === 1){
-        console.log(city.listWonders_[wonderD].name_,'of',city.name_,"has been destroyed");
         city.listWonders_.splice(wonderD, 1);
       }
     }
@@ -137,7 +115,6 @@ class World {
           ].name_ &&
         this.listCities_[actualCity].name_ !== cityWithTheRemainingWonder.name_
       ) {
-        // Console.log(this.listCities_[actualCity].listWonders_[this.listCities_[actualCity].listWonders_.length - 1].name_);
         this.listCities_[actualCity].destroyWonderInConstruction();
       }
     }
@@ -145,18 +122,15 @@ class World {
 
   uniqueWonder() {
     // On fait en sorte que les villes ne construisent pas des merveilles déjà finies
-    // console.log("verification of the wonders's unicity, list of wonders already finished !");
     let allWondersAreBuild = 0;
     for (let wonder = 0; wonder < this.listWondersAchieved_.length; wonder++) {
       // On va compter les 1 dans le tableau de listWondersAchieved_ pour voir si toutes les wonders ne sont pas déjà toutes finies
-      console.log(this.listWondersAchieved_[wonder]);
       if (this.listWondersAchieved_[wonder] === 1) {
         allWondersAreBuild += 1;
       }
     }
 
     if (allWondersAreBuild === 7) {
-      console.log("Toutes les merveilles sont construites !");
     } else {
       for (let city = 0; city < this.listCities_.length; city++) {
         // Pour chaque ville
@@ -362,7 +336,6 @@ class World {
 
 
   }
-
 
   showWorld() {
     this.uniqueWonder();
