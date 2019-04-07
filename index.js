@@ -27,7 +27,6 @@ setInterval(() => world.showWorld(), 3000);
 // world.buildingWonders(5000);
 // world.showWorld();
 
-<<<<<<< HEAD
 world.listCities_[0].soulForTheArmy(4000);
 setInterval(()=> world.listCities_[0].armyStatus(),2000);
 setInterval(() => world.listCities_[0].buryTheDead(),10000);
@@ -39,7 +38,7 @@ setInterval(() => world.listCities_[0].showShit(), 1000);
 // >>>>>>> 31c3ff8ed894010eb026eed3a5816ce45c14ae74
 
 setInterval(() => world.listCities_[0].getShit(world.listCities_[0]),1000);
-=======
+
 // world.listCities_[0].soulForTheArmy(4000);
 // setInterval(()=> world.listCities_[0].armyStatus(),2000);
 // setInterval(() => world.listCities_[0].buryTheDead(),10000);
@@ -50,4 +49,3 @@ setInterval(() => world.listCities_[0].getShit(world.listCities_[0]),1000);
 // setInterval(() => world.listCities_[0].showShit(), 1000);
 
 // setInterval(() => world.listCities_[0].getShit(world.listCities_[0]),1000);
->>>>>>> cfaacc5001d44471a86e98494dded2f71c96341b

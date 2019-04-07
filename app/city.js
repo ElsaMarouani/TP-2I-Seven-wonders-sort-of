@@ -61,13 +61,10 @@ class City {
     );
   }
 
-<<<<<<< HEAD
   annihilation(s){
     this.army_=s;
   }
 
-=======
->>>>>>> cfaacc5001d44471a86e98494dded2f71c96341b
   addWonder() {
     this.listWonders_.push(new Wonder());
     // Console.log(this.name_, "begin", this.listWonders_[this.listWonders_.length-1].name_);

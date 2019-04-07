@@ -84,8 +84,8 @@ class World {
           }
         }
         else{
-          this.destroyAllWondersInConstruction(){
-          }
+          this.destroyAllWondersInConstruction()
+
         }
       }
 
