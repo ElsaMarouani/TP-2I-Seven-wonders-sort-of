@@ -64,8 +64,6 @@ class Wonder {
       this.giveWonderPower();
       return true;
     }
-
-    // Console.log(this.goldNeededToAchieve_ - this.actualGoldInvested_, 'needed to finish', this.name_);
     return false;
   }
 
