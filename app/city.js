@@ -53,6 +53,15 @@ class City {
     this.scienceLevel_ += 1;
   }
 
+  setGold(gold){
+      this.gold_+=Math.floor(gold);
+  }
+
+  setCorn(corn){
+      this.corn_+=Math.floor(corn);
+  }
+
+
   showShit() {
     console.log(
       `${this.name_}: C ${this.corn_}, G ${this.gold_}, S ${

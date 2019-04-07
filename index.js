@@ -1,5 +1,6 @@
 const {War} = require('./app/war');
 const {World} = require('./app/world');
+const {Trade} = require('./app/trade');
 
 const world = new World();
 world.addCity('Giza', 'Ptah');
@@ -11,24 +12,33 @@ world.addCity('Rhodes', 'Hélios');
 world.addCity('Alexandria', 'Osiris');
 const guerre = new War();
 
-world.listCities_[0].soulForTheArmy(50000);
+//declare une fonction asychrone de type Trade
+const main = async (city1,gold1) => {
+const t = new Trade();
+await t.asyncCall(city1,gold1);
+}
 
-guerre.battle(
-  world.listCities_[0].getArmy(),
-  world.listCities_[0].getArmy(),
-  world.listCities_[0].getScience(),
-  world.listCities_[0].getScience()
-);
-world.listCities_[0].armyStatus();
+//l'appel de la fonction asynchrone
+setInterval(()=>main(world.listCities_[0],world.listCities_[0].getGold()),4000);
 
-setInterval(() => world.buildingWonders(2000), 4000);
-setInterval(() => world.citiesGettingEverything(), 4000);
-setInterval(() => world.showWorld(), 4000);
+// world.listCities_[0].soulForTheArmy(50000);
+//
+// guerre.battle(
+//   world.listCities_[0].getArmy(),
+//   world.listCities_[0].getArmy(),
+//   world.listCities_[0].getScience(),
+//   world.listCities_[0].getScience()
+// );
+// world.listCities_[0].armyStatus();
+//
+// setInterval(() => world.buildingWonders(2000), 4000);
+// setInterval(() => world.citiesGettingEverything(), 4000);
+// setInterval(() => world.showWorld(), 4000);
 // world.buildingWonders(5000);
 // world.showWorld();
 
 // world.listCities_[0].soulForTheArmy(4000);
-setInterval(()=> world.listCities_[0].armyStatus(),2000);
+// setInterval(()=> world.listCities_[0].armyStatus(),2000);
 //setInterval(() => world.listCities_[0].buryTheDead(),10000);
 // setInterval(() => world.listCities_[0].scienceInvest(world.listCities_[0].getGold() * 0.1), 1000);
 //setInterval(() => world.listCities_[0].showShit(), 1000);
