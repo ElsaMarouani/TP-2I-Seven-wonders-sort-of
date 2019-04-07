@@ -50,7 +50,7 @@ class World {
           }
         }
         console.log(allWondersAreBuild, "are already build.");
-        if (allWondersAreBuild <= 7) {
+        if (allWondersAreBuild < 7) {
           if (this.listCities_[city].buildingWonder(gold)) {
             // Si buildingWonder return true, on a bien construit une merveille
             this.printText(
@@ -84,8 +84,7 @@ class World {
           }
         }
         else{
-          this.destroyAllWondersInConstruction(){
-          }
+          this.destroyAllWondersInConstruction();
         }
       }
 
@@ -104,8 +103,20 @@ class World {
   }
 
   destroyAllWondersInConstruction(){
+    console.log("destruction de toutes les merveilles en cours de construction.")
     for (let city = 0; city < this.listCities_.length; city++){
+      if(this.listCities_[city].listWonders_[this.listCities_[city].listWonders_.length -1].isFinished_){
+        this.listCities_[city].deleteWonder();
+      }
+    }
+  }
 
+  destroyAWonderFinished(city){
+    for (let wonderD = 0; wonderD < city.listWonders_.length; wonderD++){
+      if(city.listWonders_[wonderD].isFinished_ === 1){
+        console.log(city.listWonders_[wonderD].name_,'of',city.name_,"has been destroyed");
+        city.listWonders_.splice(wonderD, 1);
+      }
     }
   }
 
@@ -269,37 +280,7 @@ class World {
     return 'What the hell is that type ?!';
   }
 
-  centerText(wordToPrint, lengthToHave) {
-    if (typeof wordToPrint === 'number') {
-      // Si c'est un nombre
-      wordToPrint = String(wordToPrint); // On le change en string pour le traitement
-    }
-
-    if (typeof wordToPrint === 'string') {
-      if (wordToPrint.length <= lengthToHave) {
-        const midLength = wordToPrint.length / 2;
-        while (wordToPrint.length <= lengthToHave) {
-          // Tant que le string est trop petit
-          if (wordToPrint.length <= lengthToHave / 2 + midLength) {
-            wordToPrint = ' ' + wordToPrint; // Rajoute des espaces pour avoir la taille demandée
-          } else {
-            wordToPrint += ' ';
-          }
-        }
-
-        return wordToPrint;
-      }
-
-      return 'This text is too long !';
-    }
-
-    return 'What the hell is that type ?!';
-  }
-
-  showWorld() {
-    this.uniqueWonder();
-    this.printWonders();
-    this.printPlayersInformation();
+  printWorld(){
 
     /*
         Console.log("                                                                                          --- SEVEN WONDERS ---                                                                                         ");
@@ -379,6 +360,15 @@ class World {
     console.log('|', this.textToPrint[7], '|                          ', this.listPlayersInformationToPrint_[27], '   ', this.listWondersToPrint_[27], '|');
     console.log('--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------');
 
+
+  }
+
+
+  showWorld() {
+    this.uniqueWonder();
+    this.printWonders();
+    this.printPlayersInformation();
+    this.printWorld();
     this.cleanText();
   }
 }
