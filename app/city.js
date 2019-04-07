@@ -9,7 +9,7 @@ class City {
     this.listWonders_ = [];
     this.wondersAchieved_ = 0;
     this.corn_ = 1000;
-    this.gold_ = 1000;
+    this.gold_ = 100;
     this.scienceLevel_ = 1;
     this.scienceInvest_ = 0;
     this.army_ = [];

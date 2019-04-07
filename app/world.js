@@ -204,9 +204,9 @@ class World {
           'C:' + this.goodFormatText(this.listCities_[city].corn_, 9);
         this.listPlayersInformationToPrint_[whereToPrint + 3] =
           'A:' +
-          this.goodFormatText(this.listCities_[city].army_, 4) +
+          this.goodFormatText(this.listCities_[city].army_.length, 4) +
           ' S:' +
-          this.goodFormatText(this.listCities_[city].scienceLevel, 2);
+          this.goodFormatText(this.listCities_[city].scienceLevel_, 2);
         whereToPrint += 4 * this.listCities_[city].wondersAchieved_;
       }
     }
