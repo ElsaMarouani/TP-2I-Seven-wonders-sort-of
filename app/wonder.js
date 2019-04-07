@@ -1,11 +1,11 @@
 /*
-La Pyramide de Khéops garde les ressources
-Les Jardins suspendus de Babylone alimentent les troupes
-La Statue de Zeus plus de chance d'avoir un super
-Le Mausolée d'Halicarnasse  ramène les morts
-Le Temple d'Artémis rallonge durée vie soldats
-Le Colosse de Rhodes meilleur en défense
-Le Phare d'Alexandrie pour le commerce
+P: La Pyramide de Khéops garde les ressources
+J: Les Jardins suspendus de Babylone alimentent les troupes
+Z: La Statue de Zeus plus de chance d'avoir un super
+M: Le Mausolée d'Halicarnasse  ramène les morts
+T: Le Temple d'Artémis rallonge durée vie soldats
+C: Le Colosse de Rhodes meilleur en défense
+A: Le Phare d'Alexandrie pour le commerce
 */
 
 class Wonder {
@@ -18,6 +18,7 @@ class Wonder {
       3: '          '
     };
     this.wonderChosen_ = -1;
+    this.isFinished_ = 0;
     this.actualGoldInvested_ = 0;
     this.goldNeededToAchieve_ = 5000;
     this.TheGreatPyramid_ = 1;
@@ -52,21 +53,23 @@ class Wonder {
       this.name_ = 'The Lighthouse of Alexandria';
     }
 
-    // Console.log('Begin The wonder', this.name, 'construction.');
     this.drawWonder();
   }
 
   buildWonder(gold) {
     this.actualGoldInvested_ += gold;
     if (this.actualGoldInvested_ >= this.goldNeededToAchieve_) {
-      return this.wonderFinished();
+      this.actualGoldInvested_ = 0;
+      this.isFinished_ = 1;
+      this.giveWonderPower();
+      return true;
     }
 
-    //console.log(this.goldNeededToAchieve_ - this.actualGoldInvested_, 'needed to finish', this.name_);
+    // Console.log(this.goldNeededToAchieve_ - this.actualGoldInvested_, 'needed to finish', this.name_);
     return false;
   }
 
-  wonderFinished() {
+  giveWonderPower() {
     if (this.wonderChosen_ === 0) {
       this.TheGreatPyramid_ = 10;
     } else if (this.wonderChosen_ === 1) {
@@ -82,10 +85,6 @@ class Wonder {
     } else {
       this.TheLighthouseOfAlexandria_ = 10;
     }
-
-    //console.log(this.name_, 'finished.');
-    this.actualGoldInvested_ = 0;
-    return true;
   }
 
   drawWonder() {

@@ -1,17 +1,34 @@
 const {City} = require('./app/city');
 const {War} = require('./app/war');
+const {World} = require('./app/world');
 
-const bBottom = new City('Bikini bottom', "bob l'éponge");
-const bB = new City('Bikini battom', "bobl'éponge");
-bBottom.soulForTheArmy(50000);
+const world = new World();
+world.addCity('Gizeh', 'Ptah');
+world.addCity('Babylone', 'Ahriman');
+world.addCity('Olympie', 'Zeus');
+world.addCity('Bodrum', 'Tengri');
+world.addCity('Ephèse', 'Artemis');
+world.addCity('Rhodes', 'Hélios');
+world.addCity('Alexandria', 'Osiris');
+
+//const bBottom = new City('Bikini bottom', "bob l'éponge");
+//const bB = new City('Bikini battom', "bobl'éponge");
+world.listCities_[0].soulForTheArmy(50000);
 const guerre = new War();
 guerre.battle(
-  bBottom.getArmy(),
-  bB.getArmy(),
-  bBottom.getScience(),
-  bB.getScience()
+    world.listCities_[0].getArmy(),
+    world.listCities_[0].getArmy(),
+    world.listCities_[0].getScience(),
+    world.listCities_[0].getScience()
 );
-bBottom.armyStatus();
+world.listCities_[0].armyStatus();
+
+// SetInterval(() => world.buildingWonders(1000), 3000);
+// setInterval(() => world.showWorld(), 3000);
+
+// world.buildingWonders(5000);
+//world.showWorld();
+
 // BBottom.soulForTheArmy(4000);
 // setInterval(()=> bBottom.armyStatus(),2000);
 // setInterval(() => bBottom.buryTheDead(),10000);
