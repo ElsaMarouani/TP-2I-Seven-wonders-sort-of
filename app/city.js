@@ -17,12 +17,16 @@ class City {
     this.init();
   }
 
+  randC(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
   init() {
     this.addWonder();
     this.divinity_.init();
     this.divinity_.worldEvents.on('favor', shit => this.getShit(shit));
     this.divinity_.worldEvents.on('blessing', shit => this.getShit(shit));
-    //this.divinity_.worldEvents.on('retribution', s => this.annihilation(s));
+    // This.divinity_.worldEvents.on('retribution', s => this.annihilation(s));
   }
 
   getGold() {
@@ -46,21 +50,51 @@ class City {
     this.gold_ += Math.floor(s.gold);
   }
 
-  gettingEverything() {
-    this.divinity_.offeringCorn(this.corn_);
-    this.divinity_.offeringGold(this.gold_);
-    // this.army_ += 50;
+  limitTheRessources() {
+    this.corn_ = Math.floor(this.corn_);
+    this.gold = Math.floor(this.gold_);
+    if (this.corn_ > 999999999) {
+      this.corn_ = 999999999;
+    }
+
+    if (this.gold > 999999999) {
+      this.gold_ = 999999999;
+    }
+
+    if (this.army_.length > 999999) {
+      console.log('army too big:', this.army_.length);
+    }
+
+    if (this.scienceLevel_ > 99) {
+      this.scienceLevel_ = 99;
+    }
+
+    if (this.listWonders_.length > 7) {
+      console.log(
+        'Too much wonder on the same city:',
+        this.listWonders_.length
+      );
+    }
+
+    if (this.scienceInvest_ > 999999999) {
+      this.scienceInvest_ = 999999999;
+    }
+  }
+
+  gettingBlessed() {
+    this.divinity_.offeringCorn(this.corn_ * 10);
+    this.divinity_.offeringGold(this.gold_ * 10);
+    // This.army_ += 50;
     this.scienceLevel_ += 1;
   }
 
-  setGold(gold){
-      this.gold_+=Math.floor(gold);
+  setGold(gold) {
+    this.gold_ += Math.floor(gold);
   }
 
-  setCorn(corn){
-      this.corn_+=Math.floor(corn);
+  setCorn(corn) {
+    this.corn_ += Math.floor(corn);
   }
-
 
   showShit() {
     console.log(
@@ -70,7 +104,7 @@ class City {
     );
   }
 
-  // annihilation(s){
+  // Annihilation(s){
   //   this.army_=s;
   // }
 
@@ -82,7 +116,9 @@ class City {
     this.listWonders_.pop();
   }
 
-  buildingWonder(gold) {
+  buildingWonder() {
+    const gold = this.gold_ * this.randC(0, 1);
+    this.gold_ -= gold;
     if (this.listWonders_[this.listWonders_.length - 1].buildWonder(gold)) {
       this.wondersAchieved_ += 1;
       return true;
@@ -96,7 +132,7 @@ class City {
     this.addWonder();
   }
 
-  //méthode qui permet d'investir de l'or afin d'améliorer la science, le prix des technoloogies est de plus en plus important
+  // Méthode qui permet d'investir de l'or afin d'améliorer la science, le prix des technoloogies est de plus en plus important
   scienceInvest(gold) {
     if (this.scienceLevel_ < 99) {
       this.scienceInvest_ += gold;
@@ -108,7 +144,7 @@ class City {
     }
   }
 
-  //méthode de recrutement de nouveaux soldats à prix fixe
+  // Méthode de recrutement de nouveaux soldats à prix fixe
   soulForTheArmy(gold) {
     let i = 0;
     let nbr = gold / 100;
@@ -127,12 +163,12 @@ class City {
     }
   }
 
-  //méthode qui permet de supprimer les soldats morts de l'armée
+  // Méthode qui permet de supprimer les soldats morts de l'armée
   buryTheDead() {
     this.army_ = this.army_.filter(s => s.isAlive_);
   }
 
-  //méthode employé plutot au debuggage afin de voir l'état global de toute l'armée
+  // Méthode employé plutot au debuggage afin de voir l'état global de toute l'armée
   // (peut être utile pour l'utilisateur mais pas dans le cadre de simulation)
   armyStatus() {
     const mort = this.army_.filter(s => !s.isAlive_).length;

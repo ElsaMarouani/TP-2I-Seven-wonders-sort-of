@@ -64,6 +64,7 @@ class Wonder {
       this.giveWonderPower();
       return true;
     }
+
     return false;
   }
 

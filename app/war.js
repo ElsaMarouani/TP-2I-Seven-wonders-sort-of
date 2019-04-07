@@ -10,19 +10,11 @@ class War {
       defensescience;
     const result = attackpower - defensepower;
     if (result < 0) {
-      attackantsoldiers.forEach(
-          s=>s.attackDefeat()
-      );
-      defensesoldiers.forEach(
-          s=>s.defenseVictory()
-      );
+      attackantsoldiers.forEach(s => s.attackDefeat());
+      defensesoldiers.forEach(s => s.defenseVictory());
     } else if (result > 0) {
-      attackantsoldiers.forEach(
-        s=>s.attackVictory()
-      );
-      defensesoldiers.forEach(
-        s=>s.defenseDefeat()
-      );
+      attackantsoldiers.forEach(s => s.attackVictory());
+      defensesoldiers.forEach(s => s.defenseDefeat());
     } else {
       attackantsoldiers.forEach(s => s.setAlive(false));
       defensesoldiers.forEach(s => s.setAlive(false));
